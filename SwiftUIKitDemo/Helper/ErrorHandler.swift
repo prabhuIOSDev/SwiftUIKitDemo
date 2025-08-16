@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum DataEror:Error{
+    case invalidResponse
+    case invalidUrl
+    case invalidData
+    case message(_ error : Error?)
+}
