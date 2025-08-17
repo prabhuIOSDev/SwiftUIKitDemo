@@ -8,22 +8,31 @@
 import UIKit
 
 class ProductDetailsVC: UIViewController {
+    
+    var viewModel : ProductDetailsModelView?
+
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var titleLab: UILabel!
+    @IBOutlet weak var subtitle: UILabel!
+    @IBOutlet weak var ratingBtn: UIButton!
+    @IBOutlet weak var disLab: UILabel!
+    @IBOutlet weak var priceLab: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDetilas()
+      
     }
+
+    func setDetilas(){
+        guard let data = viewModel else{ return}
+        image.setImage(with: data.image)
+        titleLab.text = data.title
+        subtitle.text = data.category
+        ratingBtn.setTitle(data.rating, for: .normal)
+        priceLab.text = data.price
+        
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
-
 }

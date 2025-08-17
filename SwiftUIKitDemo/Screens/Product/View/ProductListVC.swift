@@ -25,8 +25,6 @@ extension ProductListVC{
         productTableView.dataSource = self
         productTableView.delegate = self
         productTableView.register(UINib(nibName: "ProductListCell", bundle: nil), forCellReuseIdentifier: "ProductListCell")
-        
-
         initViewModel()
         observeEvent()
         
@@ -38,11 +36,8 @@ extension ProductListVC{
     
     // data binding event observed - communication ...
     func observeEvent(){
-        
         viewModel.eventHandler = { [weak self] event in
-            
             guard let self else {return}
-             
             switch event {
             case .loading:break
             case .stopLoading:break
@@ -51,7 +46,7 @@ extension ProductListVC{
                     self.productTableView.reloadData()
                 }
             case .error(let error):
-                print(error)
+                print(error as Any)
                 
             }
             
@@ -69,7 +64,6 @@ extension ProductListVC:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell", for: indexPath) as? ProductListCell else {
-            
                 return UITableViewCell()
             
         }
@@ -77,4 +71,15 @@ extension ProductListVC:UITableViewDataSource,UITableViewDelegate{
         cell.product = product
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedIndex = viewModel.products[indexPath.row]
+        let detail = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsVC") as! ProductDetailsVC
+        detail.viewModel = ProductDetailsModelView(product: selectedIndex)
+        navigationController?.pushViewController(detail, animated: true)
+        
+
+        
+    }
 }
+
