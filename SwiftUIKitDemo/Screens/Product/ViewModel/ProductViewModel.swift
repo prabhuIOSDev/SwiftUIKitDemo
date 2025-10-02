@@ -14,6 +14,7 @@ final class ProductViewModel{
     var products :[Prodouct] = []
     var eventHandler :((_ event :Event)->Void)?  // clouser .... data binding
     
+    
   func fetchProductDataApi(){
       self.eventHandler?(Event.loading)
       ApiManager.shared.fetchProduct { response in

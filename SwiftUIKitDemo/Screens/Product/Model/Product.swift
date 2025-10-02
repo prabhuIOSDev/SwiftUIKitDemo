@@ -18,6 +18,9 @@ struct Prodouct : Decodable{
     let image:String
     let rating:Rate
     
+ 
+    
+    
 }
 
 struct Rate :Decodable{
